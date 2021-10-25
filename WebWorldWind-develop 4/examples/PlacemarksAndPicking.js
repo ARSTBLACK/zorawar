@@ -50,8 +50,8 @@ requirejs(['./WorldWindShim',
             {layer: new WorldWind.AtmosphereLayer(), enabled: true},
             // WorldWindow UI layers.
             {layer: new WorldWind.CompassLayer(), enabled: true},
-            {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-            {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
+            {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true}
+            {layer: new WorldWind.Placemark(), enabled : true}
         ];
 
         for (var l = 0; l < layers.length; l++) {
@@ -82,6 +82,7 @@ requirejs(['./WorldWindShim',
             "castshadow-red.png",
             "castshadow-teal.png",
             "castshadow-white.png"
+            "castshadow-orange.png"
         ];
 
         var pinLibrary = WorldWind.configuration.baseUrl + "images/pushpins/", // location of the image files
@@ -89,7 +90,7 @@ requirejs(['./WorldWindShim',
             placemarkAttributes = new WorldWind.PlacemarkAttributes(null),
             highlightAttributes,
             placemarkLayer = new WorldWind.RenderableLayer("Placemarks"),
-            latitude = 47.684444,
+            latitude = 470.684444,
             longitude = -121.129722;
 
         // Set up the common placemark attributes.
@@ -105,7 +106,7 @@ requirejs(['./WorldWindShim',
         placemarkAttributes.drawLeaderLine = true;
         placemarkAttributes.leaderLineAttributes.outlineColor = WorldWind.Color.RED;
 
-        // For each placemark image, create a placemark with a label.
+        // for each placemark image, create a placemark with a label.
         for (var i = 0, len = images.length; i < len; i++) {
             // Create the placemark and its label.
             placemark = new WorldWind.Placemark(new WorldWind.Position(latitude, longitude + i, 1e2), true, null);

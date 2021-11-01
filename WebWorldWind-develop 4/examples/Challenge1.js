@@ -50,28 +50,7 @@ requirejs(['./WorldWindShim',
 
         // Define the images we'll use for the placemarks.
         var images = [
-            "Mr-Bean-Funny-Portrait-PNG-Transparent-Images.png",
-            "plain-black.png",
-            "plain-blue.png",
-            "plain-brown.png",
-            "plain-gray.png",
-            "plain-green.png",
-            "plain-orange.png",
-            "plain-purple.png",
-            "plain-red.png",
-            "plain-teal.png",
-            "plain-white.png",
-            "plain-yellow.png",
-            "castshadow-black.png",
-            "castshadow-blue.png",
-            "castshadow-brown.png",
-            "castshadow-gray.png",
-            "castshadow-green.png",
-            "castshadow-orange.png",
-            "castshadow-purple.png",
-            "castshadow-red.png",
-            "castshadow-teal.png",
-            "castshadow-white.png"
+            "Mr-Bean-Funny-Portrait-PNG-Transparent-Image.png"
         ];
 
         var pinLibrary = WorldWind.configuration.baseUrl + "images/pushpins/",
@@ -96,66 +75,35 @@ requirejs(['./WorldWindShim',
         placemarkAttributes.drawLeaderLine = true;
         placemarkAttributes.leaderLineAttributes.outlineColor = WorldWind.Color.RED;
 
-        // Create the placemark attributes for this placemark. Note that the attributes differ only by their
-        placemark = new WorldWind.Placemark(new WorldWind.Position(latitude, longitude, 1e2), true, null);
-        placemark.label = "My house ".toString() + "\n"
-            + "Lat " + placemark.position.latitude.toPrecision(4).toString() + "\n"
-            + "Lon " + placemark.position.longitude.toPrecision(5).toString();
-        placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-        placemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-        console.log(pinLibrary)
-        placemarkAttributes.imageSource = pinLibrary + images[0];
-        placemark.attributes = placemarkAttributes;
-        // image URL.
-        placemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-        // placemarkAttributes.imageSource = images[0];
-        placemark.attributes = placemarkAttributes;
+        // For each placemark image, create a placemark with a label.
+        for (var i = 0, len = images.length; i < len; i++) {
 
-        // Create the highlight attributes for this placemark. Note that the normal attributes are specified as
-        // the default highlight attributes so that all properties are identical except the image scale. You could
-        // instead vary the color, image, or other property to control the highlight representation.
-        highlightAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-        highlightAttributes.imageScale = 1.2;
-        placemark.highlightAttributes = highlightAttributes;
+            // Create the placemark and its label.
+            placemark = new WorldWind.Placemark(new WorldWind.Position(latitude, longitude, 1e2), true, null);
+            placemark.label = "My house ".toString() + "\n"
+                + "Lat " + placemark.position.latitude.toPrecision(4).toString() + "\n"
+                + "Lon " + placemark.position.longitude.toPrecision(5).toString();
+            placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+            placemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+            placemarkAttributes.imageSource = pinLibrary;
+            placemark.attributes = placemarkAttributes;
 
-        // Add the placemark to the layer.
-        placemarkLayer.addRenderable(placemark);
-        // // For each placemark image, create a placemark with a label.
-        // for (var i = 0, len = images.length; i < len; i++) {
-        //     // Create the placemark attributes for this placemark. Note that the attributes differ only by their
-        //     placemark = new WorldWind.Placemark(new WorldWind.Position(latitude, longitude, 1e2), true, null);
-        //     placemark.label = "My house ".toString() + "\n"
-        //         + "Lat " + placemark.position.latitude.toPrecision(4).toString() + "\n"
-        //         + "Lon " + placemark.position.longitude.toPrecision(5).toString();
-        //     placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-        //     placemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-        //     console.log(pinLibrary)
-        //     placemarkAttributes.imageSource = pinLibrary;
-        //     placemark.attributes = placemarkAttributes;
-        //     // image URL.
-        //     placemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-        //     placemarkAttributes.imageSource = images[0];
-        //     placemark.attributes = placemarkAttributes;
-        //
-        //     // Create the highlight attributes for this placemark. Note that the normal attributes are specified as
-        //     // the default highlight attributes so that all properties are identical except the image scale. You could
-        //     // instead vary the color, image, or other property to control the highlight representation.
-        //     highlightAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-        //     highlightAttributes.imageScale = 1.2;
-        //     placemark.highlightAttributes = highlightAttributes;
-        //
-        //     // Add the placemark to the layer.
-        //     placemarkLayer.addRenderable(placemark);
-        // }
-        // placemark = new WorldWind.Placemark(new WorldWind.Position(latitude, longitude, 1e2), true, null);
-        // placemark.label = "My house ".toString() + "\n"
-        //     + "Lat " + placemark.position.latitude.toPrecision(4).toString() + "\n"
-        //     + "Lon " + placemark.position.longitude.toPrecision(5).toString();
-        // placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-        // placemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-        // console.log(pinLibrary)
-        // placemarkAttributes.imageSource = pinLibrary;
-        // placemark.attributes = placemarkAttributes;
+            // Create the placemark attributes for this placemark. Note that the attributes differ only by their
+            // image URL.
+            placemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+            placemarkAttributes.imageSource = pinLibrary + images[i];
+            placemark.attributes = placemarkAttributes;
+
+            // Create the highlight attributes for this placemark. Note that the normal attributes are specified as
+            // the default highlight attributes so that all properties are identical except the image scale. You could
+            // instead vary the color, image, or other property to control the highlight representation.
+            highlightAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+            highlightAttributes.imageScale = 1.2;
+            placemark.highlightAttributes = highlightAttributes;
+
+            // Add the placemark to the layer.
+            placemarkLayer.addRenderable(placemark);
+        }
         // Add the placemarks layer to the WorldWindow's layer list.
         wwd.addLayer(placemarkLayer);
 
@@ -198,7 +146,7 @@ requirejs(['./WorldWindShim',
                     // Applications might use this information to determine whether the user wants to edit the label
                     // or is merely picking the placemark as a whole.
                     if (pickList.objects[p].labelPicked) {
-                        console.log("Label picked");
+
                     }
                 }
             }

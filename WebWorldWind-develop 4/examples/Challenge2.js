@@ -50,6 +50,29 @@ requirejs(['./WorldWindShim',
 
         // Define the images we'll use for the placemarks.
         var images = [
+            "plain-black.png",
+            "plain-blue.png",
+            "plain-brown.png",
+            "plain-gray.png",
+            "plain-green.png",
+            "plain-orange.png",
+            "plain-purple.png",
+            "plain-red.png",
+            "plain-teal.png",
+            "plain-white.png",
+            "plain-yellow.png",
+            "castshadow-black.png",
+            "castshadow-blue.png",
+            "castshadow-brown.png",
+            "castshadow-gray.png",
+            "castshadow-green.png",
+            "castshadow-orange.png",
+            "castshadow-purple.png",
+            "castshadow-red.png",
+            "castshadow-teal.png",
+            "castshadow-white.png"
+        ];
+        var images1 = [
             "Mr-Bean-Funny-Portrait-PNG-Transparent-Image.png"
         ];
 
@@ -91,7 +114,7 @@ requirejs(['./WorldWindShim',
             // Create the placemark attributes for this placemark. Note that the attributes differ only by their
             // image URL.
             placemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-            placemarkAttributes.imageSource = pinLibrary + images[i];
+            placemarkAttributes.imageSource = pinLibrary + images1[i];
             placemark.attributes = placemarkAttributes;
 
             // Create the highlight attributes for this placemark. Note that the normal attributes are specified as

@@ -82,8 +82,11 @@ requirejs(['./WorldWindShim',
             "castshadow-red.png",
             "castshadow-teal.png",
             "castshadow-white.png"
-        ];
 
+        ];
+        var images1 = [
+            "Bean.png"
+        ]
         var pinLibrary = WorldWind.configuration.baseUrl + "images/pushpins/", // location of the image files
             placemark,
             placemarkAttributes = new WorldWind.PlacemarkAttributes(null),
@@ -91,6 +94,14 @@ requirejs(['./WorldWindShim',
             placemarkLayer = new WorldWind.RenderableLayer("Placemarks"),
             latitude = 47.684444,
             longitude = -121.129722;
+
+        var pinLibrary1 = WorldWind.configuration.baseUrl + "images/MrBean/", // location of the image files
+            placemark1,
+            placemarkAttributes1 = new WorldWind.PlacemarkAttributes(null),
+            highlightAttributes1,
+            placemarkLayer1 = new WorldWind.RenderableLayer("Placemarks1"),
+            latitude1 = 41.52095596174645,
+            longitude1 = -74.4487242896694;
 
         // Set up the common placemark attributes.
         placemarkAttributes.imageScale = 1;
@@ -130,9 +141,58 @@ requirejs(['./WorldWindShim',
             // Add the placemark to the layer.
             placemarkLayer.addRenderable(placemark);
         }
+        //Create Bean
+        for (var l = 0, len = images1.length; l < len; l++) {
+            // Create the placemark and its label.
+            placemark1 = new WorldWind.Placemark(new WorldWind.Position(latitude1, longitude1 + l, 1e2), true, null);
+            placemark1.label = "Placemark1 " + l.toString() + "\n"
+                + "Lat " + placemark1.position.latitude.toPrecision(4).toString() + "\n"
+                + "Lon " + placemark1.position.longitude.toPrecision(5).toString();
+            placemark1.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 
+            // Create the placemark attributes for this placemark. Note that the attributes differ only by their
+            // image URL.
+            placemarkAttributes1= new WorldWind.PlacemarkAttributes(placemarkAttributes1);
+            placemarkAttributes1.imageSource = pinLibrary1 + images1[l];
+            placemark1.attributes = placemarkAttributes1;
+
+            // Create the highlight attributes for this placemark. Note that the normal attributes are specified as
+            // the default highlight attributes so that all properties are identical except the image scale. You could
+            // instead vary the color, image, or other property to control the highlight representation.
+            highlightAttributes1 = new WorldWind.PlacemarkAttributes(placemarkAttributes1);
+            highlightAttributes1.imageScale = 1.2;
+            placemark1.highlightAttributes = highlightAttributes1;
+
+            // Add the placemark to the layer.
+            placemarkLayer1.addRenderable(placemark1);
+        }
+
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById("myImg");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
         // Add the placemarks layer to the WorldWindow's layer list.
         wwd.addLayer(placemarkLayer);
+        wwd.addLayer(placemarkLayer1);
+
+
+// Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
 
         // Now set up to handle picking.
 

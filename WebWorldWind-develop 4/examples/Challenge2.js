@@ -204,16 +204,14 @@ function (WorldWind,
             y = o.clientY;
 
         var redrawRequired = highlightedItems.length > 0; // must redraw if we de-highlight previously picked items
-
-        // De-highlight any previously highlighted placemarks.
-        for (var h = 0; h < highlightedItems.length; h++) {
-            highlightedItems[h].highlighted = false;
-        }
-        highlightedItems = [];
-
-        // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
-        // relative to the upper left corner of the canvas rather than the upper left corner of the page.
-        var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
+    // De-highlight any previously highlighted placemarks.
+    for (var h = 0; h < highlightedItems.length; h++) {
+        highlightedItems[h].highlighted = false;
+    }
+    highlightedItems = [];
+    // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
+    // relative to the upper left corner of the canvas rather than the upper left corner of the page.
+    var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
         if (pickList.objects.length > 0) {
             redrawRequired = true;
         }
@@ -246,7 +244,7 @@ function (WorldWind,
         if (redrawRequired) {
             wwd.redraw(); // redraw to make the highlighting changes take effect on the screen
         }
-    };
+    //I am very sorry mr. Computer
 
     // Listen for mouse moves and highlight the placemarks that the cursor rolls over.
     wwd.addEventListener("mousemove", handlePick);

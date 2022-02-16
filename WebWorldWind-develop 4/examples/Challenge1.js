@@ -52,7 +52,7 @@ requirejs(['./WorldWindShim',
 
         // Define the images we'll use for the placemarks.
         var images = [
-            "Bean.png"
+            "../images/Challenges/MrBean/Bean.png"
         ];
 
         var pinLibrary = WorldWind.configuration.baseUrl + "images/pushpins/",

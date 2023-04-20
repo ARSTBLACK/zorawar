@@ -97,72 +97,50 @@
                 width: 100%;
             }
         }
-
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="WorldMap">
-            <div class="jumbotron hidden-xs">
-                <h1 style="text-align:center">WorldWind Placemarks</h1>
+<div class="container">
+    <div class="jumbotron hidden-xs">
+        <h1 style="text-align:center">WorldWind Placemarks</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>Projection</h4>
+            <div class="dropdown" id="projectionDropdown">
             </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <h4>Projection</h4>
-                    <div class="dropdown" id="projectionDropdown">
-                    </div>
-                    <br>
-                    <h4>Layers</h4>
-                    <div class="list-group" id="layerList">
-                    </div>
-                    <br>
-                    <h4>Destination</h4>
-                    <div class="input-group" id="searchBox">
-                        <input type="text" class="form-control" placeholder="GoTo" id="searchText"/>
-                        <span class="input-group-btn">
-                            <button id="searchButton" class="btn btn-primary" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
+            <br>
+            <h4>Layers</h4>
+            <div class="list-group" id="layerList">
+            </div>
+            <br>
+            <h4>Destination</h4>
+            <div class="input-group" id="searchBox">
+                <input type="text" class="form-control" placeholder="GoTo" id="searchText"/>
+                <span class="input-group-btn">
+                    <button id="searchButton" class="btn btn-primary" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
             </div>
         </div>
+        <div class="col-sm-9" id="globe">
+            <canvas id="canvasOne" width="1000" height="1000"
+                    style="width: 100%; height: auto; background-color: black;">
+                Your browser does not support HTML5 Canvas.
+            </canvas>
+        </div>
+    </div>
 
+    <div class="modal_container">
+        <img id="img02" src="../images/Jakub/Jakub.1.png" alt="Bing-ChillingWarsaw" style="width:100%;max-width:300px">
 
-
-
-
-<!--            <img id="myImg" src="../images/Challenges/Pentagon/Pentagon.jpg" alt="S" style="width:100%;max-width:300px">-->
-
-
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-                <span class="close">&times;</span>
-                <img class="modal-content" id="img01" src="../images/Challenges/Pentagon/Nuke.png" alt="Say good bye to earth!">
-                <div id="caption">Say goodbye to planet earth!</div>
-            </div>
-
-
-
-
-
-
-<div class="col-sm-9" id="globe">
-
-    <canvas id="canvasOne" width="1000" height="1000"
-
-    <img id="myImg" src="../images/Challenges/Pentagon/Pentagon.jpg" alt="S" style="width:100%;max-width:300px">
-
-
-
-
-    </canvas>
-
-
-</div>
-
-</div>
-
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01" src="../images/Jakub/warsaw.png" alt="Bing-Chilling asdfasdfasdfin Warsaw" style="width:100%;max-width:300px">
+            <div id="caption">deez nuts</div>
+        </div>
     </div>
 </div>
 </body>

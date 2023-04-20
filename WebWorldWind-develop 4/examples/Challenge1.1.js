@@ -52,48 +52,52 @@ requirejs(['./WorldWindShim',
             {layer: new WorldWind.CompassLayer(), enabled: true},
             {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
             {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
+            // {layer: new WorldWind.placemark(), enabled: true}
         ];
-
+        // console.log(wwd);
         for (var l = 0; l < layers.length; l++) {
             layers[l].layer.enabled = layers[l].enabled;
             wwd.addLayer(layers[l].layer);
         }
 
         // Define the images we'll use for the placemarks.
-        var images = [
-            "plain-black.png",
-            "plain-blue.png",
-            "plain-brown.png",
-            "plain-gray.png",
-            "plain-green.png",
-            "plain-orange.png",
-            "plain-purple.png",
-            "plain-red.png",
-            "plain-teal.png",
-            "plain-white.png",
-            "plain-yellow.png",
-            "castshadow-black.png",
-            "castshadow-blue.png",
-            "castshadow-brown.png",
-            "castshadow-gray.png",
-            "castshadow-green.png",
-            "castshadow-orange.png",
-            "castshadow-purple.png",
-            "castshadow-red.png",
-            "castshadow-teal.png",
-            "castshadow-white.png"
-        ];
+        // var images = [
+        //     "plain-black.png",
+        //     "plain-blue.png",
+        //     "plain-brown.png",
+        //     "plain-gray.png",
+        //     "plain-green.png",
+        //     "plain-orange.png",
+        //     "plain-purple.png",
+        //     "plain-red.png",
+        //     "plain-teal.png",
+        //     "plain-white.png",
+        //     "plain-yellow.png",
+        //     "castshadow-black.png",
+        //     "castshadow-blue.png",
+        //     "castshadow-brown.png",
+        //     "castshadow-gray.png",
+        //     "castshadow-green.png",
+        //     "castshadow-orange.png",
+        //     "castshadow-purple.png",
+        //     "castshadow-red.png",
+        //     "castshadow-teal.png",
+        //     "castshadow-white.png"
+        // ];
+        //
+        var Jakub = [ "Jakub.1.png" ];
+        console.log(Jakub);
 
-        var pinLibrary = WorldWind.configuration.baseUrl + "images/pushpins/", // location of the image files
+        var pinLibrary = WorldWind.configuration.baseUrl + "images/Jakub/", // location of the image files
             placemark,
             placemarkAttributes = new WorldWind.PlacemarkAttributes(null),
             highlightAttributes,
-            placemarkLayer = new WorldWind.RenderableLayer("Jakubbbbbbbb"),
-            latitude = 47.684444,
-            longitude = -121.129722;
+            placemarkLayer = new WorldWind.RenderableLayer("Placemarks"),
+            latitude = 52.2297,
+            longitude = 21.0122;
 
         // Set up the common placemark attributes.
-        placemarkAttributes.imageScale = 1;
+        placemarkAttributes.imageScale = .5;
         placemarkAttributes.imageOffset = new WorldWind.Offset(
             WorldWind.OFFSET_FRACTION, 0.3,
             WorldWind.OFFSET_FRACTION, 0.0);
@@ -102,22 +106,21 @@ requirejs(['./WorldWindShim',
             WorldWind.OFFSET_FRACTION, 0.5,
             WorldWind.OFFSET_FRACTION, 1.0);
         placemarkAttributes.labelAttributes.color = WorldWind.Color.YELLOW;
+        // placemarkAttributes.labelAttributes.scale
         placemarkAttributes.drawLeaderLine = true;
         placemarkAttributes.leaderLineAttributes.outlineColor = WorldWind.Color.RED;
 
         // For each placemark image, create a placemark with a label.
-        for (var i = 0, len = images.length; i < len; i++) {
+        for (var i = 0, len = Jakub.length; i < len; i++) {
             // Create the placemark and its label.
-            placemark = new WorldWind.Placemark(new WorldWind.Position(latitude, longitude + i, 1e2), true, null);
-            placemark.label = "Placemark " + i.toString() + "\n"
-                + "Lat " + placemark.position.latitude.toPrecision(4).toString() + "\n"
-                + "Lon " + placemark.position.longitude.toPrecision(5).toString();
-            placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;x
+            placemark = new WorldWind.Placemark(new WorldWind.Position(latitude, longitude), true, null);
+            placemark.label = "Bingchillin in Poland";
+            placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 
             // Create the placemark attributes for this placemark. Note that the attributes differ only by their
             // image URL.
             placemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-            placemarkAttributes.imageSource = pinLibrary + images[i];
+            placemarkAttributes.imageSource = pinLibrary + Jakub;
             placemark.attributes = placemarkAttributes;
 
             // Create the highlight attributes for this placemark. Note that the normal attributes are specified as
@@ -133,6 +136,7 @@ requirejs(['./WorldWindShim',
 
         // Add the placemarks layer to the WorldWindow's layer list.
         wwd.addLayer(placemarkLayer);
+        wwd.addLayer(placemark);
 
         // Now set up to handle picking.
 

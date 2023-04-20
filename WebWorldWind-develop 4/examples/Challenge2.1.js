@@ -1,30 +1,30 @@
-// *
-// * Copyright 2003-2006, 2009, 2017, 2020 United States Government, as represented
-// * by the Administrator of the National Aeronautics and Space Administration.
-// * All rights reserved.
-// *
-// * The NASAWorldWind/WebWorldWind platform is licensed under the Apache License,
-// * Version 2.0 (the "License"); you may not use this file except in compliance
-// * with the License. You may obtain a copy of the License
-// * at http://www.apache.org/licenses/LICENSE-2.0
-//     *
-// * Unless required by applicable law or agreed to in writing, software distributed
-// * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-// * CONDITIONS OF ANY KIND, either express or implied. See the License for the
-//                                                                          * specific language governing permissions and limitations under the License.
-// *
-// * NASAWorldWind/WebWorldWind also contains the following 3rd party Open Source
-// * software:
-// *
-// *    ES6-Promise – under MIT License
-// *    libtess.js – SGI Free Software License B
-// *    Proj4 – under MIT License
-// *    JSZip – under MIT License
-// *
-// * A complete listing of 3rd Party software notices and licenses included in
-// * WebWorldWind can be found in the WebWorldWind 3rd-party notices and licenses
-// * PDF found in code  directory.
-// */
+/*
+ * Copyright 2003-2006, 2009, 2017, 2020 United States Government, as represented
+ * by the Administrator of the National Aeronautics and Space Administration.
+ * All rights reserved.
+ *
+ * The NASAWorldWind/WebWorldWind platform is licensed under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License
+ * at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ *
+ * NASAWorldWind/WebWorldWind also contains the following 3rd party Open Source
+ * software:
+ *
+ *    ES6-Promise – under MIT License
+ *    libtess.js – SGI Free Software License B
+ *    Proj4 – under MIT License
+ *    JSZip – under MIT License
+ *
+ * A complete listing of 3rd Party software notices and licenses included in
+ * WebWorldWind can be found in the WebWorldWind 3rd-party notices and licenses
+ * PDF found in code  directory.
+ */
 /**
  * Illustrates how to display and pick Placemarks.
  */
@@ -51,89 +51,82 @@ requirejs(['./WorldWindShim',
             // WorldWindow UI layers.
             {layer: new WorldWind.CompassLayer(), enabled: true},
             {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
-            {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true},
-            {layer: new WorldWind.Placemark(wwd), enabled: true}
+            {layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
+            // {layer: new WorldWind.placemark(), enabled: true}
         ];
-
-        for (var b = 0; b < layers.length; b++) {
-            layers[b].layer.enabled = layers[b].enabled;
-            wwd.addLayer(layers[b].layer);
+        // console.log(wwd);
+        for (var l = 0; l < layers.length; l++) {
+            layers[l].layer.enabled = layers[l].enabled;
+            wwd.addLayer(layers[l].layer);
         }
 
         // Define the images we'll use for the placemarks.
-        var images = [
-            "plain-black.png",
-            "plain-blue.png",
-            "plain-brown.png",
-            "plain-gray.png",
-            "plain-green.png",
-            "plain-orange.png",
-            "plain-purple.png",
-            "plain-red.png",
-            "plain-teal.png",
-            "plain-white.png",
-            "plain-yellow.png",
-            "castshadow-black.png",
-            "castshadow-blue.png",
-            "castshadow-brown.png",
-            "castshadow-gray.png",
-            "castshadow-green.png",
-            "castshadow-orange.png",
-            "castshadow-purple.png",
-            "castshadow-red.png",
-            "castshadow-teal.png",
-            "castshadow-white.png"
+        // var images = [
+        //     "plain-black.png",
+        //     "plain-blue.png",
+        //     "plain-brown.png",
+        //     "plain-gray.png",
+        //     "plain-green.png",
+        //     "plain-orange.png",
+        //     "plain-purple.png",
+        //     "plain-red.png",
+        //     "plain-teal.png",
+        //     "plain-white.png",
+        //     "plain-yellow.png",
+        //     "castshadow-black.png",
+        //     "castshadow-blue.png",
+        //     "castshadow-brown.png",
+        //     "castshadow-gray.png",
+        //     "castshadow-green.png",
+        //     "castshadow-orange.png",
+        //     "castshadow-purple.png",
+        //     "castshadow-red.png",
+        //     "castshadow-teal.png",
+        //     "castshadow-white.png"
+        // ];
+        //
+        var Jakub = [ "Jakub.1.png", "Chungus.webp" ];
+        console.log(Jakub);
 
-        ];
-
-
-        var PentagonImages = [
-            "Pentagon.jpg"
-        ]
-
-
-        var Pentagon = WorldWind.configuration.baseUrl + "../images/Challenges/Pentagon/Nuke.png", // location of the image files
+        var pinLibrary = WorldWind.configuration.baseUrl + "images/Jakub/", // location of the image files
             placemark,
             placemarkAttributes = new WorldWind.PlacemarkAttributes(null),
             highlightAttributes,
-            placemarkLayer = new WorldWind.RenderableLayer("Placemarks1"),
-            latitude = 41.52095596174645,
-            longitude = -74.4487242896694;
-
-
-
-
+            placemarkLayer = new WorldWind.RenderableLayer("Placemarks"),
+            latitude = 52.2297,
+            longitude = 21.0122;
 
 
 
         // Set up the common placemark attributes.
-        placemarkAttributes.imageScale = 1;
+        placemarkAttributes.imageScale = 5;
         placemarkAttributes.imageOffset = new WorldWind.Offset(
             WorldWind.OFFSET_FRACTION, 0.3,
-            WorldWind.OFFSET_FRACTION, 0.0
-        );
+            WorldWind.OFFSET_FRACTION, 0.0);
         placemarkAttributes.imageColor = WorldWind.Color.WHITE;
         placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
             WorldWind.OFFSET_FRACTION, 0.5,
-            WorldWind.OFFSET_FRACTION, 1.0
-        );
+            WorldWind.OFFSET_FRACTION, 1.0);
         placemarkAttributes.labelAttributes.color = WorldWind.Color.YELLOW;
+        // placemarkAttributes.labelAttributes.scale
         placemarkAttributes.drawLeaderLine = true;
         placemarkAttributes.leaderLineAttributes.outlineColor = WorldWind.Color.RED;
 
         // For each placemark image, create a placemark with a label.
-        for (var i = 0, len = PentagonImages.length; i < len; i++) {
+        for (var i = 0, len = Jakub.length; i < len; i++) {
             // Create the placemark and its label.
-            placemark = new WorldWind.Placemark(new WorldWind.Position(latitude, longitude + i, 1e2), true, null);
-            placemark.label = "Placemark " + i.toString() + "\n"
-                + "Lat " + placemark.position.latitude.toPrecision(4).toString() + "\n"
-                + "Lon " + placemark.position.longitude.toPrecision(5).toString();
+            placemark = new WorldWind.Placemark(new WorldWind.Position(latitude, longitude), true, null);
+            placemark.label = "Bingchillin in Poland";
             placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-
+            if (i == 1) {
+                placemark = new WorldWind.Placemark(new WorldWind.Position(latitude - 3.3731, longitude + 18.66), true, null);
+                placemark.label = "Dieing in Paris";
+                placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+            }
             // Create the placemark attributes for this placemark. Note that the attributes differ only by their
             // image URL.
             placemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
-            placemarkAttributes.imageSource = Pentagon + PentagonImages[i];
+            placemarkAttributes.imageSource = pinLibrary + Jakub;
             placemark.attributes = placemarkAttributes;
 
             // Create the highlight attributes for this placemark. Note that the normal attributes are specified as
@@ -147,28 +140,9 @@ requirejs(['./WorldWindShim',
             placemarkLayer.addRenderable(placemark);
         }
 
-
-
-
-
-
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = document.getElementById("myImg");
-        var modalImg = document.getElementById("img01");
-        var captionText = document.getElementById("caption");
-
-
-// Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
+        // Add the placemarks layer to the WorldWindow's layer list.
+        wwd.addLayer(placemarkLayer);
+        wwd.addLayer(placemark);
 
         // Now set up to handle picking.
 
@@ -192,23 +166,34 @@ requirejs(['./WorldWindShim',
             // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
             // relative to the upper left corner of the canvas rather than the upper left corner of the page.
             var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
-            console.log(pickList.objects);
+            // if (pickList.objects.length > 0) {
+            //     redrawRequired = true;
+            // }
 
-
-
-
-            if (pickList.objects.length > 0) {
-                redrawRequired = true;
-            }
-            // console.log(pickList.objects)
             // Highlight the items picked by simply setting their highlight flag to true.
             if (pickList.objects.length > 0) {
-                modal.style.display = "block";
-                captionText.innerHTML = this.alt;
-                for (var p = 0; p < pickList.objects.length; p++) {
-
+                for (var p = 1; p < pickList.objects.length; p++) {
+                    console.log("it worked")
                     pickList.objects[p].userObject.highlighted = true;
+                    // Get the modal
+                    var modal = document.getElementById("myModal");
 
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+//                     var modalImg = document.getElementById("img01");
+                    var captionText = document.getElementById("caption");
+
+                    modal.style.display = "block";
+                    // modalImg.src = this.src;
+                    captionText.innerHTML = this.alt;
+
+
+// Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+                    span.onclick = function() {
+                        modal.style.display = "none";
+                    }
                     // Keep track of highlighted items in order to de-highlight them later.
                     highlightedItems.push(pickList.objects[p].userObject);
 
@@ -216,14 +201,11 @@ requirejs(['./WorldWindShim',
                     // If instead the user picked the placemark's image, the "labelPicked" property is false.
                     // Applications might use this information to determine whether the user wants to edit the label
                     // or is merely picking the placemark as a whole.
+                    if (pickList.objects[p].labelPicked) {
 
-                    // if (pickList.objects[p].labelPicked) {
-                    //     console.log("Label picked");
-                    //         modal.style.display = "block";
-                    //         modalImg.src = this.src;
-                    //         captionText.innerHTML = this.alt;
-                    //
-                    // }
+                        console.log("Label picked");
+
+                    }
                 }
             }
 
@@ -234,7 +216,7 @@ requirejs(['./WorldWindShim',
         };
 
         // Listen for mouse moves and highlight the placemarks that the cursor rolls over.
-        wwd.addEventListener("click", handlePick);
+        wwd.addEventListener("mousemove", handlePick);
 
         // Listen for taps on mobile devices and highlight the placemarks that the user taps.
         var tapRecognizer = new WorldWind.TapRecognizer(wwd, handlePick);
